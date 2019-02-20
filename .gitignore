@@ -1,5 +1,13 @@
 .idea/*
 .DS_STORE
-node_modules
+
+!node_modules/
+node_modules/*
+!node_modules/react-timekeeper/
+node_modules/react-timekeeper/*
+!node_modules/react-timekeeper/lib/
+node_modules/react-timekeeper/lib/*
+!node_modules/react-timekeeper/lib/components
+
 dist/*
 
