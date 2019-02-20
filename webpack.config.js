@@ -40,8 +40,11 @@ module.exports = {
     hot: true,
     proxy: {
       '/api': 'http://localhost:3000',
+<<<<<<< HEAD
       '/home': 'http://localhost:3000',
       '/clock': 'http://localhost:3000'
+=======
+>>>>>>> parent of 4a5ad22... firebase auth
     }
   }
 };
