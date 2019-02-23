@@ -19,7 +19,7 @@ class ClockSelector extends React.Component {
     }
     render(){
         return (
-            <div class="center">
+            <div className="center">
                 {this.state.displayTimepicker ?
                     <TimeKeeper 
 
