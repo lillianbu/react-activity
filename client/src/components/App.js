@@ -18,15 +18,21 @@ class App extends React.Component {
       }
 
   }
+  //used in Login to pass up user info
+  loginPassUser = (user) => {
+    this.setState({
+      userInfo: user
+    });
+}
 
-  render() {
+render() {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Login} user={this.state.user}/>
-          <Route exact path="/home" component={Home}/>
+          <Route exact path="/" render={(props) => <Login {...props} passUser={this.loginPassUser} />}/>
+          <Route exact path="/home" render={(props) => <Home {...props} />}/>
           <Route exact path="/clock" component={ClockSelector}/>
-          <Route exact path="/profile" component={Profile}/>
+          <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state.userInfo} />}/>
         </Switch>
       </div>
     )

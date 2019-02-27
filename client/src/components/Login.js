@@ -15,8 +15,9 @@ class Login extends React.Component {
         this.setState({
           userInfo: user
         });
-        console.log(this.state.userInfo)
-        this.props.history.push('/home')//sends to home
+        console.log("user in login: ", user);
+        this.props.passUser(user);//callback to send user info to app
+        this.props.history.push('/home');//sends to home
       });
   }
 
