@@ -8,6 +8,7 @@ import Home from "./Home"
 import Login from "./Login"
 import Clock from "./Clock"
 import Profile from "./Profile"
+import Images from "./Images"
 
 class App extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ render() {
           <Route exact path="/" render={(props) => <Login {...props} passUser={this.loginPassUser} />}/>
           <Route exact path="/home" render={(props) => <Home {...props} />}/>
           <Route exact path="/clock" component={ClockSelector}/>
+          <Route exact path="/images" component={Images}/>
           <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state.userInfo} />}/>
         </Switch>
       </div>
