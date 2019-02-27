@@ -23,7 +23,6 @@ body {
 
 }
 
-<<<<<<< HEAD
 #clock-circle {
     border: 2px solid #000; 
     border-color: black;
@@ -32,7 +31,7 @@ body {
     height: 200px;
     border-radius: 50%;
 }
-=======
+
 .row {
     display: flex;
 }
@@ -41,4 +40,12 @@ body {
     flex: 50%;
 }
 
->>>>>>> 399f74ab2e3e83c2a8b8ec3957ce5de46011e0a8
+.clockface {
+    max-width:80%;
+    height:auto;
+}
+
+.clock-container {
+    /*top: 80px;*/
+    margin-top:15%;
+}
