@@ -1,23 +1,22 @@
 import React from "react";
 import "../css/app.css";
 import fire, { auth, provider } from '../../../firebase';
-import Link from "react-router-dom/es/Link";
 
 class Login extends React.Component {
 
-constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-
-login = (event) => {
+  login = (event) => {
     auth.signInWithPopup(provider) 
       .then((result) => {
         const user = result.user;
         this.setState({
-          user
+          userInfo: user
         });
-        console.log(this.state.user)
+        console.log(this.state.userInfo)
+        this.props.history.push('/home')//sends to home
       });
   }
 
@@ -26,8 +25,7 @@ login = (event) => {
       <div>
         <button onClick={this.login}>Login through Firebase</button>
       </div>
-    )
-    ;
+    );
   }
 }
 

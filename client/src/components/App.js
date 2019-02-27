@@ -6,10 +6,12 @@ import ClockSelector from "./ClockSelector"
 import Root from "./Root"
 import Home from "./Home"
 import Login from "./Login"
+import Profile from "./Profile"
 
 class App extends React.Component {
   constructor(props) {
       super(props);
+
       this.state = {
         userInfo: null,
       }
@@ -21,8 +23,9 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route exact path="/" component={Login} user={this.state.user}/>
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/clock" component={ClockSelector} />
+          <Route exact path="/home" component={Home}/>
+          <Route exact path="/clock" component={ClockSelector}/>
+          <Route exact path="/profile" component={Profile}/>
         </Switch>
       </div>
     )
