@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clip-clock">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="clock" clip-path="url(#clip-clock)">
+    <rect width="1920" height="1080" fill="#fff"/>
+    <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(562 142)" fill="#f5f5f5" stroke="#d5d5d5" stroke-width="3">
+      <circle cx="398" cy="398" r="398" stroke="none"/>
+      <circle cx="398" cy="398" r="396.5" fill="none"/>
+    </g>
+    <text id="_6" data-name="6" transform="translate(960 905)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-27.405" y="0">6</tspan></text>
+    <text id="_5" data-name="5" transform="translate(1128 860)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-25.47" y="0">5</tspan></text>
+    <text id="_4" data-name="4" transform="translate(1253 730)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-29.745" y="0">4</tspan></text>
+    <text id="_3" data-name="3" transform="translate(1303 566)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-25.38" y="0">3</tspan></text>
+    <text id="_12" data-name="12" transform="translate(960 238)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-41.805" y="0">12</tspan></text>
+    <text id="_1" data-name="1" transform="translate(1128 285)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-16.245" y="0">1</tspan></text>
+    <text id="_2" data-name="2" transform="translate(1250 398)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-25.56" y="0">2</tspan></text>
+    <text id="_9" data-name="9" transform="translate(618 566)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-27.405" y="0">9</tspan></text>
+    <text id="_8" data-name="8" transform="translate(666 730)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-28.71" y="0">8</tspan></text>
+    <text id="_7" data-name="7" transform="translate(788 860)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-26.505" y="0">7</tspan></text>
+    <text id="_10" data-name="10" transform="translate(684 413)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-46.035" y="0">10</tspan></text>
+    <text id="_11" data-name="11" transform="translate(799 291)" fill="#121212" font-size="90" font-family="Montserrat-Regular, Montserrat"><tspan x="-32.49" y="0">11</tspan></text>
+  </g>
+</svg>
