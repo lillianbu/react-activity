@@ -11,11 +11,12 @@ class Profile extends React.Component {
         return (
             <div style={{padding:15+'px'}}>
                 Profile- needs name, most recent image, first image, last few hours?
-                <h1>User Name</h1>
+                <h1>{this.props.user.displayName}</h1>
+                <p>id: {this.props.user.uid}</p>
                 <div className='row'>
                     <div className='column'>
-                        <p>Most Recent Image</p>
-                        <img src='testnew.jpg' style={{width: 300 +'px', height: 300+'px'}}/>
+                        <p>User Image</p>
+                        <img src={this.props.user.photoURL} style={{width: 300 +'px', height: 300+'px'}}/>
                     </div>
                     <div className='column'>
                         <p>Oldest Image</p>
