@@ -11,11 +11,17 @@ class Home extends React.Component {
     this.props.history.push('/profile')//sends to home
   }
 
+  redirectToClockImage = () => {
+    this.props.history.push('/images')
+  }
+
+
   render() {
     return (
       <div>
         Home
         <button onClick={this.redirectToTarget}>Profile</button>
+        <button onClick={this.redirectToClockImage}>Images</button>
       </div>
     )
     ;
