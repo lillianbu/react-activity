@@ -23,8 +23,11 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.login}>Login through Firebase</button>
+      <div className="center">
+        <h1>PAL Activity App</h1>
+        <span>
+          <button onClick={this.login}>Login through Firebase</button>
+        </span>
       </div>
     );
   }

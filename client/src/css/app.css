@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 html {
     height: 100%;
 }
@@ -9,6 +11,7 @@ body {
 
 #root {
     height: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .center{
@@ -17,10 +20,8 @@ body {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     text-align: center;
-    color: #fff;
     display: flex;
     flex-direction: column;
-
 }
 
 #clock-circle {
@@ -48,4 +49,12 @@ body {
 .clock-container {
     /*top: 80px;*/
     margin-top:15%;
+}
+
+.incenter{
+    text-align: center;
+}
+
+button{
+    font-family: 'Montserrat', sans-serif;
 }

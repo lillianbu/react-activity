@@ -26,8 +26,9 @@ class Home extends React.Component {
     return (
       <div className="center">
         <div className="clock-container">
+          <h1>PAL Activity App</h1>
           <button onClick={this.redirectToTarget}>Profile</button>
-          <div>
+          <div style={{padding:15+'px'}}>
             <img className="clockface" src={require('../css/clockface.png')} />
           </div>
           <div>
