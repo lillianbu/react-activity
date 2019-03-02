@@ -7,7 +7,9 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      am: true
+      am: true,
+      word: "am",
+      hour: "one"
     }
   }
 
@@ -15,11 +17,26 @@ class Home extends React.Component {
     this.props.history.push('/profile')//sends to home
   }
 
-  toggle = () => {
-    this.setState({
-      am: !this.state.am
-    })
-    console.log(this.state.am)
+  toggleAm = () => {
+    if(!this.state.am){//pm to am
+      this.setState({
+        am: true,
+        word: "am"
+      })
+      document.getElementById('am').className = "btn_dark"
+      document.getElementById('pm').className = "btn"
+    }
+  }
+
+  togglePm = () => {
+    if(this.state.am){//am to pm
+      this.setState({
+        am: false,
+        word: "pm"
+      })
+      document.getElementById('am').className = "btn"
+      document.getElementById('pm').className = "btn_dark"
+    }
   }
 
   render() {
@@ -27,13 +44,14 @@ class Home extends React.Component {
       <div className="center">
         <div className="clock-container">
           <h1>PAL Activity App</h1>
+          <p>it is: {this.state.hour}{this.state.word}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
           <div style={{padding:15+'px'}}>
-            <img className="clockface" src={require('../css/clockface.png')} />
+            <img className="clockface" src={require('../css/clockface.png')}/>
           </div>
           <div>
-            <button onClick={this.toggle}>AM</button>
-            <button onClick={this.toggle}>PM</button>
+            <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
+            <button id="pm" className="btn" onClick={this.togglePm}>PM</button>
           </div>
         </div>
       </div>
