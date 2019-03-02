@@ -42,8 +42,29 @@ module.exports = {
         ]
       }
     ]
-
-    loaders: [
+  },
+  // loaders: [
+  //       {
+  //           test: /\.svg$/,
+  //           exclude: /node_modules/,
+  //           use: {
+  //               loader: 'svg-react-loader',
+  //               options: {
+  //                   tag: 'symbol',
+  //                   attrs: {
+  //                       title: 'example',
+  //                   },
+  //                   name: 'Clockface',
+  //               },
+  //           },
+  //       }
+  //   ],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.LoaderOptionsPlugin({
+         // test: /\.xxx$/, // may apply this only for some modules
+         options: {
+           loaders: [
         {
             test: /\.svg$/,
             exclude: /node_modules/,
@@ -59,9 +80,8 @@ module.exports = {
             },
         }
     ]
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
+         }
+       })
   ],
   devServer: {
     contentBase: './client/dist',
@@ -69,10 +89,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000',
       '/home': 'http://localhost:3000',
-      '/clock': 'http://localhost:3000', 
-      '/images': 'http://localhost:3000',
+      '/clock': 'http://localhost:3000',
       '/profile': 'http://localhost:3000',
-
     }
   }
 };
