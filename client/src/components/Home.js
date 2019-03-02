@@ -15,6 +15,10 @@ class Home extends React.Component {
     this.props.history.push('/profile')//sends to home
   }
 
+  redirectToImages = () => {
+    this.props.history.push('/images')
+  }
+
   toggle = () => {
     this.setState({
       am: !this.state.am
@@ -28,6 +32,7 @@ class Home extends React.Component {
         <div className="clock-container">
           <h1>PAL Activity App</h1>
           <button onClick={this.redirectToTarget}>Profile</button>
+          <button onClick={this.redirectToImages}>Images</button>
           <div style={{padding:15+'px'}}>
             <img className="clockface" src={require('../css/clockface.png')} />
           </div>
