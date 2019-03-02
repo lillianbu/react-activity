@@ -20,6 +20,7 @@ class Images extends React.Component {
             img.src = url; // replaces blank image
             console.log("image downloaded from firebase");
         }); 
+   
         }
         catch (error) {
             console.log(error);
