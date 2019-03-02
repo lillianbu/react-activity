@@ -16,10 +16,6 @@ class Home extends React.Component {
     this.props.history.push('/profile')//sends to home
   }
 
-  redirectToImages = () => {
-    this.props.history.push('/images')
-  }
-
   toggle = () => {
     this.setState({
       am: !this.state.am
