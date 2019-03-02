@@ -42,13 +42,22 @@ body {
 }
 
 .clockface {
-    max-width:80%;
-    height:auto;
+    height:190%;
+    width:190%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    right: 45%;
+    position:relative;
+}
+
+.clock-svg {
+    width:100%;
+    height:100%;
 }
 
 .clock-container {
     /*top: 80px;*/
-    margin-top:15%;
+    margin-top:35%;
 }
 
 .incenter{
