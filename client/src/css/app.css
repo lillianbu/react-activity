@@ -45,6 +45,10 @@ body {
     max-width:80%;
     height:auto;
 }
+.clockfacenew {
+    width: 796px;
+    height: 796px;
+}
 
 .clock-container {
     /*top: 80px;*/
@@ -57,4 +61,14 @@ body {
 
 button{
     font-family: 'Montserrat', sans-serif;
+}
+
+.btn{
+    background: #dbdbdb;
+}
+.btn_dark{
+    background: #a7a7a7;
+}
+button:focus{
+    outline: none;
 }
