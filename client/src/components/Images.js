@@ -47,7 +47,7 @@ class Images extends React.Component {
         //into a url and into the image description, and also image id
         return (
             <div>
-                <p>Image Desc</p>
+                <p>Image Name: {this.props.imageName}</p>
                 <div>
                     <img id = {this.props.imageID} src='http://www.debbiesdayspasalon.com/wp-content/uploads/2015/10/blank-500x500.png' style={{width: 500 +'px', height: 500+'px'}}/>
                 </div>
