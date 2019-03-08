@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/app.css";
 import fire, { auth, provider } from '../../../firebase';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
 
