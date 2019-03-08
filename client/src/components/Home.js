@@ -39,17 +39,21 @@ class Home extends React.Component {
       document.getElementById('pm').className = "btn_dark"
     }
   }
+  //pass time up
+  passTime = (time) =>{
+    this.setState({
+      hour: time
+    })
+  }
 
   render() {
     return (
       <div className="center">
         <div className="clock-container">
           <h1>PAL Activity App</h1>
-          <p>it is: {this.state.hour}{this.state.word}</p>
+          <p>it is: {this.state.hour} {this.state.word}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
-          <div className = "clockface">
-            <Clockface />
-          </div>
+          <Clockface am={this.state.am} passTime={this.passTime}/>
           <div>
             <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
             <button id="pm" className="btn" onClick={this.togglePm}>PM</button>

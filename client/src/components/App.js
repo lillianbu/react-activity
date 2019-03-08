@@ -6,7 +6,6 @@ import ClockSelector from "./ClockSelector"
 import Root from "./Root"
 import Home from "./Home"
 import Login from "./Login"
-import Clock from "./Clock"
 import Profile from "./Profile"
 import Images from "./Images"
 
