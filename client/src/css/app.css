@@ -44,23 +44,16 @@ body {
 .clockface {
     height:170%;
     width:170%;
-    padding-top: 10%;
-    padding-bottom: 10%;
     right: 35%;
-    position:relative;
+    position: relative;
 }
 
 .clock-svg {
     width:100%;
     height:100%;
 }
-.clockfacenew {
-    width: 796px;
-    height: 796px;
-}
 
 .clock-container {
-    /*top: 80px;*/
     margin-top:35%;
 }
 
@@ -81,3 +74,34 @@ button{
 button:focus{
     outline: none;
 }
+
+.dot {
+    height: 14px;
+    width: 14px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.top {
+  position: absolute;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #d5d5d5;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+  }
+
+  .xbutton {
+      position: absolute;
+      top: 0px;
+      right: 5px;
+  }
