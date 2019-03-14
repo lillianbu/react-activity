@@ -18,6 +18,10 @@ class Home extends React.Component {
     this.props.history.push('/profile')//sends to home
   }
 
+  goToUpdate = () => {
+        this.props.history.push('/update');//sends to home
+  }
+
   toggleAm = () => {
     if(!this.state.am){//pm to am
       this.setState({
@@ -53,7 +57,7 @@ class Home extends React.Component {
           <h1>PAL Activity App</h1>
           <p>it is: {this.state.hour} {this.state.word}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
-          <Clockface am={this.state.am} passTime={this.passTime}/>
+          <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate}/>
           <div>
             <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
             <button id="pm" className="btn" onClick={this.togglePm}>PM</button>

@@ -1,11 +1,21 @@
 import React from "react";
 import "../css/app.css";
+import "../css/form.css";
 import { callbackify } from "util";
 import { pipeline } from "stream";
+import Popup from "reactjs-popup";
+import UpdateInfo from "./UpdateInfo"
+import Modal from 'react-modal';
+
+// Modal.setAppElement('el');
 
 class EventDot extends React.Component {
     constructor(props){
         super(props)
+
+        this.state = {
+          modalIsOpen: false
+        };
     }
     //a point has: date, time, activity, location, obj detected, faces, day, type of day
     //for a dot need time, activity, location?
@@ -44,6 +54,20 @@ class EventDot extends React.Component {
         tooltip.style.visibility = "hidden";
     }
 
+    openModal = () => {
+        this.setState({modalIsOpen: true});
+    }
+
+    afterOpenModal = () => {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '000000';
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    }
+
+
     render() {
         //time is id for now, later make into imageName, and then make a parser to get time, etc from that
         let side = {left: '14px'}
@@ -57,11 +81,28 @@ class EventDot extends React.Component {
                     <div id={this.props.time} className="tooltiptext" style={side}>
                         from: {this.props.time} {this.props.am ? 'am':'pm'}
                         <div className="xbutton" onClick={this.closeTooltip}>&times;</div>
+                        <button onClick={this.openModal}>Open Modal</button>
+                        <Modal
+                          isOpen={this.state.modalIsOpen}
+                          onAfterOpen={this.afterOpenModal}
+                          onRequestClose={this.closeModal}
+                          className="modal-update center"
+                          contentLabel="Example Modal"
+                        >
+
+                          <h2 ref={subtitle => this.subtitle = subtitle}>Update Info</h2>
+                          <button onClick={this.closeModal}>close</button>
+                          <div>I am a modal</div>
+                          <UpdateInfo/>
+                        </Modal>
+
                     </div>
                 </span>
             </div>
         )
       }
 }
+
+Modal.setAppElement('body');
 
 export default EventDot;

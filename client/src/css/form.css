@@ -5,3 +5,9 @@ input[type=text] {
 
   -webkit-appearance: none;
 }
+
+.modal-update {
+	height: 50%;
+	width: 50%;
+	background-color: #F5F5F5;
+}
