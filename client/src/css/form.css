@@ -1,0 +1,13 @@
+input[type=text] {
+  border: 1px solid #999;
+  border-radius: 10px;
+  height: 20px;
+
+  -webkit-appearance: none;
+}
+
+.modal-update {
+	height: 50%;
+	width: 50%;
+	background-color: #F5F5F5;
+}

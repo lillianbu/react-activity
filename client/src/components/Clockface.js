@@ -34,7 +34,7 @@ export default class Clockface extends React.Component {
 
     componentDidMount(){
         //tried to make it work kinda like catbook with react
-        this.getDayEvents(this.props.userID, this, function(point, thiscomp){
+        this.getDayEvents(this.props.user.uid, this, function(point, thiscomp){
             thiscomp.setState({
                 points: (thiscomp.state.points).concat(point)
             })
@@ -52,6 +52,17 @@ export default class Clockface extends React.Component {
                         time={point.time}
                     />
                 })}
+                {//OLD WORKING CODE
+                Array.from(Array(12).keys()).map( x =>//generates 1-12 time
+                    <EventDot 
+                        key={String(x)}//needs for uniqueness(must), and for now id for element
+                        time={String(x+1)+":00"}
+                        am={this.props.am}
+                        passTime={this.props.passTime}
+                        goToUpdate={this.props.goToUpdate}
+                        user={this.props.user}
+                    />
+                )}
             </div>
         );
     }
