@@ -21,21 +21,20 @@ class EventDot extends React.Component {
     }
 
     displayTime = () =>{
-        let am = 'am'
-        if (!this.props.am){
-            am = 'pm'
-        }
-        this.props.passTime(this.props.time)//callback from Home to pass time up when clicked
-        console.log(this.props.time,am)
+        let time = this.props.time.split(" ")
+        //this.props.passTime(time[0])//callback from Home to pass time up when clicked
+        console.log(this.props.time)
         //shows tooltip
         let tooltip = document.getElementById(this.props.time)
         tooltip.style.visibility = "visible";
     }
 
     getTime = () =>{
-        let times = this.props.time.split(':')
-        let first = Number(times[0])%12
-        let second = Number(times[1])/60
+        //time comes in as 11:00 am
+        let times1 = this.props.time.split(':')//would return list of 11, 00 am
+        let times2 = times1[1].split(" ")//returns list 00, am
+        let first = Number(times1[0])%12
+        let second = Number(times2[0])/60
         return first+second
     }
 
@@ -46,22 +45,23 @@ class EventDot extends React.Component {
 
     render() {
         //time is id for now, later make into imageName, and then make a parser to get time, etc from that
-        let side = {left: '14px'}
+        let side = {left: '20px'}
         if (this.getTime() > 6){
-            side = {right: '14px'}
+            side = {right: '5px'}
         }
         return (
             <div className="top" style={this.getPos()}>
                 <span className="dot top" onClick={this.displayTime}></span>
                 <span className="tooltip">
                     <div id={this.props.time} className="tooltiptext" style={side}>
-                        from: {this.props.time} {this.props.am ? 'am':'pm'}
+                        from: {this.props.time}
+                        <br/>Activity, Location
                         <div className="xbutton" onClick={this.closeTooltip}>&times;</div>
                     </div>
                 </span>
             </div>
         )
-      }
+    }
 }
 
 export default EventDot;

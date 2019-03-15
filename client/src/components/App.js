@@ -21,7 +21,7 @@ class App extends React.Component {
   //used in Login to pass up user info
   loginPassUser = (user) => {
     this.setState({
-      userInfo: user
+      user: user
     });
 }
 
@@ -30,10 +30,10 @@ render() {
       <div>
         <Switch>
           <Route exact path="/" render={(props) => <Login {...props} passUser={this.loginPassUser} />}/>
-          <Route exact path="/home" render={(props) => <Home {...props} />}/>
+          <Route exact path="/home" render={(props) => <Home {...props} userID={this.state.user.uid}/>}/>
           <Route exact path="/clock" component={ClockSelector}/>
           <Route exact path="/images" component={Images}/>
-          <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state.userInfo} />}/>
+          <Route exact path="/profile" render={(props) => <Profile {...props} userID={this.state.user.uid} />}/>
         </Switch>
       </div>
     )

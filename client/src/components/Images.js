@@ -10,18 +10,17 @@ class Images extends React.Component {
 
     getImage = (imgID, userID, imageName) => {
         try { 
-        var storage = firebase.storage(); 
-        let refurl = 'gs://languagelearning-17d88.appspot.com/Activity_Data/activity_data.csv'
-        // var refurl = 'gs://activity2019-f8035.appspot.com/users/'+userID+'/images/'+imageName;
-        console.log(refurl);
-        var gsRef = storage.refFromURL(refurl); 
-        gsRef.getDownloadURL().then(function(url) {
-            console.log(url); 
-            var img = document.getElementById(imgID); 
-            img.src = url; // replaces blank image
-            console.log("image downloaded from firebase");
-        }); 
-   
+            let storage = firebase.storage(); 
+            //let refurl = 'gs://languagelearning-17d88.appspot.com/Activity_Data/activity_data.csv'
+            let refurl = 'gs://activity2019-f8035.appspot.com/users/'+userID+'/images/'+imageName;
+            console.log(refurl);
+            let gsRef = storage.refFromURL(refurl); 
+            gsRef.getDownloadURL().then(function(url) {
+                console.log(url); 
+                let img = document.getElementById(imgID); 
+                img.src = url; // replaces blank image
+                console.log("image downloaded from firebase");
+            }); 
         }
         catch (error) {
             console.log(error);
@@ -52,7 +51,7 @@ class Images extends React.Component {
                     <img id = {this.props.imageID} src='http://www.debbiesdayspasalon.com/wp-content/uploads/2015/10/blank-500x500.png' style={{width: 500 +'px', height: 500+'px'}}/>
                 </div>
             </div>
-            );
+        );
     }
 }
 

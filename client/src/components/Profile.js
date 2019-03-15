@@ -21,10 +21,10 @@ class Profile extends React.Component {
                 </div>
                 <div className='row'>
                     <div className='column'>
-                        <Images imageID="img54" userID={this.props.user.uid} imageName="06-20-54_2018-27-July.jpg"/>
+                        <Images imageID="img54" userID={this.props.userID} imageName="06-20-54_2018-27-July.jpg"/>
                     </div>
                     <div className='column'>
-                        <Images imageID="img56" userID={this.props.user.uid} imageName="06-20-56_2018-27-July.jpg"/>
+                        <Images imageID="img56" userID={this.props.userID} imageName="06-20-56_2018-27-July.jpg"/>
                     </div>
                 </div>
             </div>

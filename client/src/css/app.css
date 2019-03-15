@@ -42,19 +42,19 @@ body {
 }
 
 .clockface {
-    height:170%;
-    width:170%;
+    height: 170%;
+    width: 170%;
     right: 35%;
     position: relative;
 }
 
 .clock-svg {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
 
 .clock-container {
-    margin-top:35%;
+    margin-top: 35%;
 }
 
 .incenter{
@@ -84,24 +84,24 @@ button:focus{
 }
 
 .top {
-  position: absolute;
+    position: absolute;
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 150px;
     background-color: #d5d5d5;
     color: black;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 5px;
+    padding: 5px;
     position: absolute;
     z-index: 1;
     top: -5px;
   }
 
-  .xbutton {
-      position: absolute;
-      top: 0px;
-      right: 5px;
+.xbutton {
+    position: absolute;
+    top: 0px;
+    right: 5px;
   }

@@ -32,7 +32,8 @@ app.get('/auth/firebase/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/home');
-  });
+  }
+);
 
 app.get('/logout', function(req, res) {
     req.logout();
