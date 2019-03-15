@@ -20,6 +20,7 @@ export default class Clockface extends React.Component {
                         am={this.props.am}
                         passTime={this.props.passTime}
                         goToUpdate={this.props.goToUpdate}
+                        user={this.props.user}
                     />
                 )}
             </div>

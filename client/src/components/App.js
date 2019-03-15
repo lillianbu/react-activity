@@ -32,7 +32,7 @@ render() {
         <Switch>
           <Route exact path="/update" component={UpdateInfo}/>
           <Route exact path="/" render={(props) => <Login {...props} passUser={this.loginPassUser} />}/>
-          <Route exact path="/home" render={(props) => <Home {...props} />}/>
+          <Route exact path="/home" render={(props) => <Home {...props} user={this.state.userInfo}/>}/>
           <Route exact path="/clock" component={ClockSelector}/>
           <Route exact path="/images" component={Images}/>
           <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state.userInfo} />}/>

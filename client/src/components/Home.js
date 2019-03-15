@@ -57,7 +57,7 @@ class Home extends React.Component {
           <h1>PAL Activity App</h1>
           <p>it is: {this.state.hour} {this.state.word}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
-          <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate}/>
+          <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate} user={this.props.user}/>
           <div>
             <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
             <button id="pm" className="btn" onClick={this.togglePm}>PM</button>
