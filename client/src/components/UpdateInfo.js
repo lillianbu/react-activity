@@ -42,9 +42,9 @@ export default class UpdateInfo extends React.Component {
 
 	 getLocationData = (e) => {
 	 	this.setState({
-	 		relationship: e.target.value,
+	 		location: e.target.value,
 	 	});
-	 	console.log(this.state.relationship);
+	 	console.log(this.state.location);
 	 }
 
 	 // writeUserData = () => {

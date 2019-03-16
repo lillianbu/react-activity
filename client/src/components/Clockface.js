@@ -18,15 +18,16 @@ export default class Clockface extends React.Component {
         let refDates = firebase.database().ref("users/"+ userID);
         //child_added gets each point one by one
         //let points = []
-        refDates.on("child_added", function(snapshot) {//may need to .orderByChild("date") , maybe .limitToFirst(30)
+        refDates.on("child_added", (snapshot) => {//may need to .orderByChild("date") , maybe .limitToFirst(30)
             let point = snapshot.val() 
 
             console.log("snapshot: ", point);
             if (point.date == "2019 11 Dec"){
                 console.log("make point")
-                //points.push(point)
+                this.state.points.push(point)
                 func(point, thiscomp)
             }
+            console.log("points: ", this.state.points)
         }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
         });
