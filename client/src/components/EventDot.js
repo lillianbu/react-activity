@@ -32,7 +32,7 @@ class EventDot extends React.Component {
 
     displayTime = () =>{
         let time = this.props.time.split(" ")
-        //this.props.passTime(time[0])//callback from Home to pass time up when clicked
+        this.props.passTime(time[0])//callback from Home to pass time up when clicked
         console.log(this.props.time)
         //shows tooltip
         let tooltip = document.getElementById(this.props.time)
@@ -73,6 +73,7 @@ class EventDot extends React.Component {
         if (this.getTime() > 6){
             side = {right: '5px'}
         }
+        console.log("rendering within dot")
         return (
             <div className="top" style={this.getPos()}>
                 <span className="dot top" onClick={this.displayTime}></span>
