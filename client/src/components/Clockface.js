@@ -7,30 +7,50 @@ import firebase from '../../../firebase';
 export default class Clockface extends React.Component {
     constructor(props){
         super(props);
-        //make a state so it will re render when points are added
+        //points hold the time points for one day
         this.state = {
-            points: [],
-            gotData: false
+            points: {},
           }
     }
-//pass in a func that will update state? bc rn it doesnt render...
+
     getDayEvents = (userID) =>{
         //pull in times from the day
         let refDates = firebase.database().ref("users/"+ userID);
-        //child_added gets each point one by one
-        refDates.on("child_added", (snapshot) => {//may need to .orderByChild("date") , maybe .limitToFirst(30)
-            let point = snapshot.val() 
 
-            console.log("snapshot: ", point);
-            if (point.date == "2019 11 Dec"){
-                console.log("make point")
-                let temp = this.state.points
-                temp.push(point)
-                this.setState({
-                    points: temp
-                })
-            }
-            console.log("points: ", this.state.points)
+        //gets each pt, ordered by date, starting at the date to the end of the date
+        refDates.orderByChild("date").equalTo("2019 11 Dec").on("child_added", (snapshot) => {
+            let ptkey = snapshot.key
+            let temp = this.state.points
+            temp[ptkey] = snapshot.val()
+            this.setState({
+                points: temp
+            })
+        }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+        });
+
+        //when point changes
+        refDates.on("child_changed", (snapshot) => {
+            //overwrite the old value
+            let ptkey = snapshot.key
+            let temp = this.state.points
+            temp[ptkey] = snapshot.val()
+            this.setState({
+                points: temp
+            })
+        }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+        });
+
+        //deletes point
+        refDates.on("child_removed", (snapshot) => {
+            //remove from state- will remove from screen
+            let ptkey = snapshot.key
+            let temp = this.state.points
+            delete temp[ptkey]
+            this.setState({
+                points: temp
+            })
         }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
         });
@@ -41,30 +61,22 @@ export default class Clockface extends React.Component {
     }
         
     render () { 
-        console.log("render")
         return (
             <div id="clockface" className = "clockface">
                 <Clock className='normal clock-svg' />
-                {//trying to put the info in the state so it will refresh-doesnt work
-                this.state.points.map(point => {
-                    console.log("dots rendering");
-                    <EventDot
-                        key={"point.date+point.time"}
-                        time={"11:30"}
-                        passTime={this.props.passTime}
-                    />
+                {Object.values(this.state.points).map(point => {
+                    //this.props.am is true if am, but time holds a string, need to convert
+                    if((String(point.time.split(" ")[1]) == "am") == this.props.am){
+                        return (<EventDot
+                            key={String(point.date+point.time)}
+                            date={point.date}
+                            time={point.time}
+                            passTime={this.props.passTime}
+                            goToUpdate={this.props.goToUpdate}
+                            user={this.props.user}
+                        />)
+                    }
                 })}
-                {/* {//OLD WORKING CODE
-                Array.from(Array(12).keys()).map( x =>//generates 1-12 time
-                    <EventDot 
-                        key={String(x)}//needs for uniqueness(must), and for now id for element
-                        time={String(x+1)+":00"}
-                        am={this.props.am}
-                        passTime={this.props.passTime}
-                        goToUpdate={this.props.goToUpdate}
-                        user={this.props.user}
-                    />
-                )} */}
             </div>
         );
     }

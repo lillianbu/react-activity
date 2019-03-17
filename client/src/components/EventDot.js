@@ -73,9 +73,9 @@ class EventDot extends React.Component {
         if (this.getTime() > 6){
             side = {right: '5px'}
         }
-        console.log("rendering within dot")
+        console.log("within dot render")
         return (
-            <div className="top" style={this.getPos()}>
+            <div id={String(this.props.date+this.props.time)} className="top" style={this.getPos()}>
                 <span className="dot top" onClick={this.displayTime}></span>
                 <span className="tooltip">
                     <div id={this.props.time} className="tooltiptext" style={side}>
