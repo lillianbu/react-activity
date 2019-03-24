@@ -82,7 +82,7 @@ class EventDot extends React.Component {
                         from: {this.props.time}
                         <br/>Activity, Location
                         <div className="xbutton" onClick={this.closeTooltip}>&times;</div>
-                        <button onClick={this.openModal}>Open Modal</button>
+                        <button onClick={this.openModal}>Update Info</button>
                         <Modal
                           isOpen={this.state.modalIsOpen}
                           onAfterOpen={this.afterOpenModal}
@@ -92,9 +92,9 @@ class EventDot extends React.Component {
                         >
 
                           <h2 ref={subtitle => this.subtitle = subtitle}>Update Info</h2>
-                          <button onClick={this.closeModal}>close</button>
                           <div>I am a modal</div>
                           <UpdateInfo user={this.props.user}/>
+                          <div style={{fontSize: '20px'}} className="xbutton" onClick={this.closeModal}>&times;</div>
                         </Modal>
 
                     </div>

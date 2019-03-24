@@ -9,11 +9,11 @@ export default class UpdateRelationship extends React.Component {
 
 	  
     render () {
-        let message = "You selected" + this.props.relationship;
+        let message = "You selected " + this.props.relationship;
         return (
         	<div>
                 <label>
-                Relationship:
+                Relationship: 
                     <select value={this.props.relationship} onChange={this.props.sendData}>
                     <option value="family">Family</option>
                     <option value="friend">Friend</option>

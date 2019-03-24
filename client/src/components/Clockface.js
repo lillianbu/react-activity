@@ -13,12 +13,12 @@ export default class Clockface extends React.Component {
           }
     }
 
-    getDayEvents = (userID) =>{
+    getDayEvents = (userID, date) =>{
         //pull in times from the day
         let refDates = firebase.database().ref("users/"+ userID);
 
-        //gets each pt, ordered by date, starting at the date to the end of the date
-        refDates.orderByChild("date").equalTo("2019 11 Dec").on("child_added", (snapshot) => {
+        //gets each pt for a date
+        refDates.orderByChild("date").equalTo(date).on("child_added", (snapshot) => {
             let ptkey = snapshot.key
             let temp = this.state.points
             temp[ptkey] = snapshot.val()
@@ -57,9 +57,9 @@ export default class Clockface extends React.Component {
     }
 
     componentDidMount(){
-        this.getDayEvents(this.props.user.uid)
+        this.getDayEvents(this.props.user.uid, "2019 11 Dec")
     }
-        
+
     render () { 
         return (
             <div id="clockface" className = "clockface">

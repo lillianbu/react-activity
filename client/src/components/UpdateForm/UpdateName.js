@@ -12,8 +12,8 @@ export default class UpdateActivity extends React.Component {
         return (
         	<div>
                 <label>
-                  Name:
-                  <input type="text" value={this.props.name} onChange={this.props.sendData} />
+                  Name: 
+                  <input style={{paddingLeft: '5px', borderRadius:'5px'}} type="text" value={this.props.name} onChange={this.props.sendData} />
                 </label>
         	</div>
     	)

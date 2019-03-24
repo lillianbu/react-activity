@@ -9,7 +9,7 @@ export default class UpdateActivity extends React.Component {
 
 	  
     render () {
-        let message = "You selected" + this.props.activity;
+        let message = "You selected " + this.props.activity;
         return (
         	<div>
                 <label>

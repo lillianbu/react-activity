@@ -13,6 +13,9 @@ body {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
 }
+:focus {
+    outline: none;
+}
 
 .center{
     position: absolute;

@@ -9,7 +9,7 @@ export default class UpdateLocation extends React.Component {
 
 	  
     render () {
-        let message = "You selected" + this.props.location;
+        let message = "You selected " + this.props.location;
         return (
         	<div>
                 <label>
