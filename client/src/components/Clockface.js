@@ -61,19 +61,26 @@ export default class Clockface extends React.Component {
     }
         
     render () { 
+    	console.log(this.state.points);
         return (
             <div id="clockface" className = "clockface">
                 <Clock className='normal clock-svg' />
-                {Object.values(this.state.points).map(point => {
+                {Object.keys(this.state.points).map(pointKey => {
+                	let point = this.state.points[pointKey];
                     //this.props.am is true if am, but time holds a string, need to convert
                     if((String(point.time.split(" ")[1]) == "am") == this.props.am){
                         return (<EventDot
                             key={String(point.date+point.time)}
+                            pointName={pointKey}
                             date={point.date}
                             time={point.time}
                             passTime={this.props.passTime}
                             goToUpdate={this.props.goToUpdate}
                             user={this.props.user}
+							activity={point.activity}
+							name={point.name}
+							relationship={point.relationship}
+							location={point.location}
                         />)
                     }
                 })}

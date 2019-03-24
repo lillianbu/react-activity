@@ -94,7 +94,17 @@ class EventDot extends React.Component {
                           <h2 ref={subtitle => this.subtitle = subtitle}>Update Info</h2>
                           <button onClick={this.closeModal}>close</button>
                           <div>I am a modal</div>
-                          <UpdateInfo user={this.props.user}/>
+                          <UpdateInfo 
+                              pointName={this.props.pointName}
+                              user={this.props.user}
+                              date={this.props.date}
+                              time={this.props.time}
+                              activity={this.props.activity}
+                              name={this.props.name}
+                              relationship={this.props.relationship}
+                              location={this.props.location}
+                              closeModal={this.closeModal}
+                          />
                         </Modal>
 
                     </div>
