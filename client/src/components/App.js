@@ -35,7 +35,7 @@ render() {
           <Route exact path="/home" render={(props) => <Home {...props} user={this.state.user}/>}/>
           <Route exact path="/clock" component={ClockSelector}/>
           <Route exact path="/images" component={Images}/>
-          <Route exact path="/profile" render={(props) => <Profile {...props} userID={this.state.user.uid} />}/>
+          <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state.user} />}/>
         </Switch>
       </div>
     )

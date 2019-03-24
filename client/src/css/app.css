@@ -51,9 +51,14 @@ body {
     position: relative;
 }
 
+.clockholder {
+    position: relative;
+}
+
 .clock-svg {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 .clock-container {

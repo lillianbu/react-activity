@@ -17,17 +17,17 @@ class EventDot extends React.Component {
           modalIsOpen: false
         };
     }
-    //a point has: date, time, activity, location, obj detected, faces, day, type of day
-    //for a dot need time, activity, location?
+
     getPos = () =>{
         //take time to get theta, scale to get r
-        let theta = (this.getTime())/12*2*3.141593
+        let theta = (this.getTime()/12)*2*3.141593
         //angle from the vertical axis, need to shift x=sin y=-cos(inverted y axis)
         let x = String(Math.sin(theta))
-        let y = -Math.cos(theta)
-        let yadjust = String(y) + " - "+ String(1.92*y) + "px"//1.92 from 4px added to height(?) times .45
-        //offset for dot size, origin at center, 45% radius (concat is just fancy adding)
-        return {top: 'calc(50% - 7px + 48% * '.concat(yadjust), left: 'calc(50% - 7px + 48% * '.concat(x)}
+        let y = String(-Math.cos(theta))
+        //50% makes center (0,0), 49% so not all the way out, 14px section for thickness of dot
+        let yval = 'calc(50% + 49% * ' + y + ' - (.5 + .49 * ' + y + ') * 14px)'
+        let xval = 'calc(50% + 49% * ' + x + ' - (.5 + .49 * ' + x + ') * 14px)'
+        return {top: yval, left: xval}
     }
 
     displayTime = () =>{
@@ -80,7 +80,7 @@ class EventDot extends React.Component {
                 <span className="tooltip">
                     <div id={this.props.time} className="tooltiptext" style={side}>
                         from: {this.props.time}
-                        <br/>Activity, Location
+                        <br/>{this.props.activity}, {this.props.location}
                         <div className="xbutton" onClick={this.closeTooltip}>&times;</div>
                         <button onClick={this.openModal}>Update Info</button>
                         <Modal
@@ -93,7 +93,18 @@ class EventDot extends React.Component {
 
                           <h2 ref={subtitle => this.subtitle = subtitle}>Update Info</h2>
                           <div>I am a modal</div>
-                          <UpdateInfo user={this.props.user}/>
+
+                          <UpdateInfo 
+                              pointName={this.props.pointName}
+                              user={this.props.user}
+                              date={this.props.date}
+                              time={this.props.time}
+                              activity={this.props.activity}
+                              name={this.props.name}
+                              relationship={this.props.relationship}
+                              location={this.props.location}
+                              closeModal={this.closeModal}
+                          />
                           <div style={{fontSize: '20px'}} className="xbutton" onClick={this.closeModal}>&times;</div>
                         </Modal>
 

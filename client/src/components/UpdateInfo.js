@@ -12,11 +12,13 @@ export default class UpdateInfo extends React.Component {
 	    super(props);
 
 	    this.state = {
-	    	activity: "sleep",
-	    	name: "lillian",
-	    	relationship: "friend",
-	    	location: "kitchen",
+	    	activity: this.props.activity,
+	    	name: this.props.name,
+	    	relationship: this.props.relationship,
+	    	location: this.props.location,
 	    };
+
+	    console.log(this.props.user)
 	  }
 
 	 getActivityData = (e) => {
@@ -61,12 +63,16 @@ export default class UpdateInfo extends React.Component {
 	 	alert('Your form was submitted' + this.state.activity + this.state.name + this.state.relationship + this.state.location);
 	 	// writeUserData();
 	 	console.log("sending to database")
-	      database.ref('users/' + this.props.user.displayName).set({
+	 	console.log(this.props.user)
+	      database.ref('users/' + this.props.user.uid + '/' + this.props.pointName ).set({
+	      	date: this.props.date,
+	      	time: this.props.time,
 	        name: this.state.name,
 	        activity: this.state.activity,
 	        relationship : this.state.relationship,
 	        location: this.state.location
 	      });
+	    this.props.closeModal();
     	event.preventDefault();
 	 }
 
