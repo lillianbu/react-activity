@@ -3,6 +3,8 @@ import "../css/app.css";
 import Clock from 'svg-react-loader?name=Clockface!../css/clockface.svg';
 import EventDot from "./EventDot";
 import firebase from '../../../firebase';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class Clockface extends React.Component {
     constructor(props){
@@ -10,15 +12,26 @@ export default class Clockface extends React.Component {
         //points hold the time points for one day
         this.state = {
             points: {},
+            chosenDate: new Date(),
           }
     }
 
-    getDayEvents = (userID) =>{
+    getDayEvents = (userID, chosenDate) =>{
+    	this.setState({
+    		chosenDate: chosenDate,
+    		points: {},
+    	});
         //pull in times from the day
         let refDates = firebase.database().ref("users/"+ userID);
 
         //gets each pt, ordered by date, starting at the date to the end of the date
-        refDates.orderByChild("date").equalTo("2019 11 Dec").on("child_added", (snapshot) => {
+        let monthMap = {0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "Jun", 6: "Jul", 7: "Aug", 8: "Sep", 9: "Oct", 10: "Nov", 11: "Dec"}
+        let year = chosenDate.getYear() + 1900
+        let month = chosenDate.getMonth()
+        let date = chosenDate.getDate()
+        let reformatDate = year + " " + date + " " + monthMap[month]
+        console.log(reformatDate);
+        refDates.orderByChild("date").equalTo(reformatDate).on("child_added", (snapshot) => {
             let ptkey = snapshot.key
             let temp = this.state.points
             temp[ptkey] = snapshot.val()
@@ -57,13 +70,22 @@ export default class Clockface extends React.Component {
     }
 
     componentDidMount(){
-        this.getDayEvents(this.props.user.uid)
+        this.getDayEvents(this.props.user.uid, this.state.chosenDate)
+    }
+
+    datePicked = (date) => {
+    	this.getDayEvents(this.props.user.uid, date)
     }
         
     render () { 
     	console.log(this.state.points);
         return (
             <div id="clockface" className = "clockface">
+            	<DatePicker 
+            	    dateFormat="yyyy/dd/MM"
+            		selected={this.state.chosenDate}
+            		onChange={this.datePicked}
+            	/>
                 <Clock className='normal clock-svg' />
                 {Object.keys(this.state.points).map(pointKey => {
                 	let point = this.state.points[pointKey];
