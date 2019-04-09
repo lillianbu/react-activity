@@ -9,13 +9,13 @@ import "react-datepicker/dist/react-datepicker.css";
 export default class Clockface extends React.Component {
     constructor(props){
         super(props);
-        //points hold the time points for one day
+        //points hold the time points for one day- a dict using their names to a list of data
         this.state = {
             points: {},
             chosenDate: new Date(),
         }
     }
-
+//values half 398, full 796, radius 378, width 20  is same thick as dots
 
     getDayEvents = (userID, chosenDate) =>{
         let refDates = firebase.database().ref("users/"+ userID);
@@ -83,13 +83,13 @@ export default class Clockface extends React.Component {
 
     makeRegions = (changepts) =>{
         //returns list of arc paths to draw
-        let activityColor = {'work':'#cc3232', 'play':'orange', 'sleep':'darkblue'}
+        let activityColor = {'work':'darkorchid', 'play':'orange', 'sleep':'darkblue'}
         let goal = []
         if(changepts[0] != undefined){
             //asuming we have a list of activity changes: changepts
             function getCoordinatesForPercent(percent) {
-                const x = Math.cos(2 * Math.PI * percent);
-                const y = Math.sin(2 * Math.PI * percent);
+                const x = Math.cos(2 * Math.PI * percent)*99;
+                const y = Math.sin(2 * Math.PI * percent)*99;
                 return [x, y];
             }
             //start at the very top
@@ -101,15 +101,15 @@ export default class Clockface extends React.Component {
                 let end = getCoordinatesForPercent(percent)
                 let largeArcFlag = (percent-lastp) > .5 ? 1 : 0;
                 lastp = percent
-                let pathInfo = 'M '+ start[0] +' '+start[1]+' A 1 1 0 '+largeArcFlag+' 1 '+end[0]+' '+end[1]+' L 0 0'
-                goal.push(<path style={{fill: activityColor[changepts[i].activity]}} d={pathInfo}></path>)
+                let pathInfo = 'M '+ start[0] +' '+start[1]+' A 99 99 0 '+largeArcFlag+' 1 '+end[0]+' '+end[1]
+                goal.push(<path style={{stroke: activityColor[changepts[i].activity]}} d={pathInfo}></path>)
                 start = getCoordinatesForPercent(percent)
             }
             //do the last segment
             let end = getCoordinatesForPercent(1)
             let largeArcFlag = (1-lastp) > .5 ? 1 : 0;
-            let pathInfo = 'M '+ start[0] +' '+start[1]+' A 1 1 0 '+largeArcFlag+' 1 '+end[0]+' '+end[1]+' L 0 0'
-            goal.push(<path style={{fill: activityColor[changepts[changepts.length-1].activity]}} d={pathInfo}></path>)
+            let pathInfo = 'M '+ start[0] +' '+start[1]+' A 99 99 0 '+largeArcFlag+' 1 '+end[0]+' '+end[1]
+            goal.push(<path style={{stroke: activityColor[changepts[changepts.length-1].activity]}} d={pathInfo}></path>)
         }
         return goal
     }
@@ -163,8 +163,13 @@ export default class Clockface extends React.Component {
                 <div className='clockholder'>
                     <Clock className='clock-svg' />
                     <svg
-                        viewBox="-1 -1 2 2"
-                        style={{transform: 'rotate(-0.25turn)', opacity: '.3', position: 'absolute', left: '0', top: '0'}}>
+                        viewBox="-100 -100 200 200"
+                        style={{transform: 'rotate(-0.25turn)', 
+                            opacity: '.4', 
+                            position: 'absolute', 
+                            left: '0', top: '0',
+                            strokeWidth: '2px',
+                            fill: 'transparent'}}>
                         {Object.keys(paths).map(path => {
                             return paths[path]
                         })}
