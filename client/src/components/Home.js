@@ -52,7 +52,6 @@ class Home extends React.Component {
       <div className="center">
         <div className="clock-container">
           <h1>PAL Activity App</h1>
-          <p>it is: {this.state.hour} {this.state.am ? "am":"pm"}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
           <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate} user={this.props.user}/>
           <div>

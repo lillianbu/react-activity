@@ -12,6 +12,7 @@ class Images extends React.Component {
         try { 
             let storage = firebase.storage(); 
             //let refurl = 'gs://languagelearning-17d88.appspot.com/Activity_Data/activity_data.csv'
+
             let refurl = 'gs://activity2019-f8035.appspot.com/users/'+userID+'/images/'+imageName;
             console.log(refurl);
             let gsRef = storage.refFromURL(refurl); 
