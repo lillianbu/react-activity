@@ -59,19 +59,19 @@ export default class UpdateInfo extends React.Component {
   //     });
   //   }
 
-	 handleSubmit = (e) => {
+  handleSubmit = (e) => {
 	 	alert('Your form was submitted' + this.state.activity + this.state.name + this.state.relationship + this.state.location);
 	 	// writeUserData();
 	 	console.log("sending to database")
 	 	console.log(this.props.user)
-	      database.ref("users/4afb720a-5214-4337-841b-d5f954214877/user_data/" + this.props.date+"/"+this.props.time ).update({
-	        //name: this.state.name,
-	        current_activity: this.state.activity,
-	        relationship : this.state.relationship,
-	        loc_name: this.state.location
-	      });
-	    this.props.closeModal();
-    	event.preventDefault();
+		database.ref("users/4afb720a-5214-4337-841b-d5f954214877/user_data/" + this.props.date+"/"+this.props.time ).update({
+			//name: this.state.name,
+			current_activity: this.state.activity,
+			relationship : this.state.relationship,
+			loc_name: this.state.location
+		});
+		this.props.closeModal();
+		event.preventDefault();
 	 }
 
     render () {
