@@ -87,6 +87,7 @@ class HeartRing extends React.Component {
             xhr.responseType = 'blob';
             xhr.onload = (event) => {
                 let blob = xhr.response;
+                console.log("blob ", blob)
                 window.myblob = blob
                 let reader = new FileReader();
                 reader.addEventListener('loadend', () => {
@@ -162,6 +163,10 @@ class HeartRing extends React.Component {
     }
 
     reformatDate = (chosenDate) =>{
+        console.log(chosenDate)
+        if(chosenDate == undefined){
+            return undefined
+        }
         let year = chosenDate.getYear() + 1900
         let month = chosenDate.getMonth()+1
         if(month < 10){
@@ -175,25 +180,32 @@ class HeartRing extends React.Component {
         }else{
             date = String(date)
         }
-        console.log("date in heart ", year + "_" + month + "_" + date)
         return year + "_" + month + "_" + date
     }
 
     componentDidUpdate(){//run after it re-renders when the date changes
-        if(this.props.date != this.state.oldDay){
-            this.getHeartData(this.reformatDate(this.props.date), this.props.uid)
+        console.log("did update")
+        let day = this.reformatDate(this.props.date)
+        console.log("date now ", day)
+        console.log("date old ", this.state.oldDay)
+
+        if(day != this.state.oldDay){
+            console.log("dates not equal")
+            this.getHeartData(day, this.props.uid)
             this.setState({
-                oldDay: this.props.date
+                oldDay: day
             })
         }
     }
 
     componentDidMount(){//run once in beginning
         //set day when first made so we know if the day changes later
+        console.log("did mount")
+        let day = this.reformatDate(this.props.date)
         this.setState({
-            oldDay: this.props.date
+            oldDay: day
         })
-        this.getHeartData(this.reformatDate(this.props.date), this.props.uid)//get data
+        this.getHeartData(day, this.props.uid)//get data
     }
 
     render() {

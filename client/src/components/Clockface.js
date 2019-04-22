@@ -118,24 +118,6 @@ export default class Clockface extends React.Component {
         })
     }
 
-    displayPoints = (changepts) =>{
-        // returns a list of keys that should be displayed
-        // between each change pt, show after 10 min
-        let display = [this.state.keylis[0]]
-        let i = 0
-        let j = 1//so we can keep track from a pt to the next
-        while(i+j < this.state.keylis.length-1){
-            let diff = this.getTime(this.state.keylis[i+j]) - this.getTime(this.state.keylis[i])
-            if(changepts.includes(this.state.keylis[i+j]) || diff >= 7/60){
-                display.push(this.state.keylis[i+j])
-                i+=j
-                j = 1
-            }
-            j++
-        }  
-        return display//list of keys  
-    }
-
     getTime = (time) =>{
         //time comes in as 01:23pm
         let hour = Number(time.slice(0,2))//would return 20
@@ -144,14 +126,33 @@ export default class Clockface extends React.Component {
         //returns time, in hrs- ex 8.05
     }
 
-    getChangePts = (am) => {
-        let ampm = []//only holds am or pm
-        for(let i = 0; i < this.state.keylis.length; i++){
-            if(this.state.keylis[i].slice(5) == am){
-                ampm.push(this.state.keylis[i])
-            }
+    displayPoints = (changepts) =>{
+        // returns a list of keys that should be displayed
+        // between each change pt, show after 7 min
+        let ampm = this.amOrPm(this.props.am)
+        if(ampm.length == 0){
+            return []
         }
+        let display = [ampm[0]]
+        let i = 0
+        let j = 1//so we can keep track from a pt to the next
+        while(i+j < ampm.length-1){
+            let diff = this.getTime(ampm[i+j]) - this.getTime(ampm[i])
+            if(changepts.includes(ampm[i+j]) || diff >= 7/60){
+                display.push(ampm[i+j])
+                i+=j
+                j = 1
+            }
+            j++
+        }  
+        return display//list of keys  
+    }
 
+    getChangePts = () => {
+        let ampm = this.amOrPm(this.props.am)//only am or pm
+        if(ampm.length == 0){//to catch no data errors
+            return []
+        }
         let changes = []
         //check if there is a change, need only am/pm to properly get next pt
         for(let i = 0; i < ampm.length-1; i++){
@@ -160,11 +161,19 @@ export default class Clockface extends React.Component {
                 changes.push(this.state.points[key])
             }
         }
-        if(am == 'pm'){
-            changes.push(this.state.points[ampm[ampm.length-1]])
-            //add the last pt so we know what the activity is(only if pm)
-        }
+        changes.push(this.state.points[ampm[ampm.length-1]])//add the last pt so we know what the activity is
         return changes//list of pts
+    }
+
+    amOrPm = (am) =>{
+        //gets only am or pm pts of this.state.keylis
+        let ampm = []
+        for(let i = 0; i < this.state.keylis.length; i++){
+            if(this.state.keylis[i].slice(5) == am){
+                ampm.push(this.state.keylis[i])
+            }
+        }
+        return ampm
     }
 
     datePicked = (date) => {
@@ -176,7 +185,6 @@ export default class Clockface extends React.Component {
     }
 
     render () { 
-        console.log("am pm ", this.props.am)
         return (
             <div id="clockface" className = "clockface">
             	<DatePicker 
@@ -189,7 +197,7 @@ export default class Clockface extends React.Component {
                     <ActivityBand points={this.getChangePts(this.props.am)}/>
                     <HeartRing date={this.state.chosenDate} am={this.props.am} uid={this.props.user.uid}/>
                     {this.state.points[this.state.keylis[0]] != undefined ? 
-                        this.displayPoints(this.getChangePts(this.props.am)).map(i => {
+                        this.displayPoints(this.getChangePts()).map(i => {
                             let point = this.state.points[i];
                             return (<EventDot
                                 key={String(point.date)+String(i)}
