@@ -4,8 +4,9 @@ import firebase from '../../../firebase';
 class HeartRing extends React.Component {
     constructor(props){
         super(props);
-        //data stored as list of lists with [0]='time', [1]=value(int)
+        //data stored as list of lists with [0]='time', [1]=value(int) (av of every 5 min)
         this.state = {
+            data: [],
             amarcs: [],
             pmarcs: [],
             oldDay: ''
@@ -77,7 +78,8 @@ class HeartRing extends React.Component {
         //returns time, in hr- ex 8.05
     }
 
-    getHeartData = (date, userID) =>{
+    getHeartData = (userID) =>{
+        //right now reads down the file to the time then processes that
         let storage = firebase.storage(); 
         let refurl = 'gs://activity2019-f8035.appspot.com/users/4afb720a-5214-4337-841b-d5f954214877/Heart_Rate/bpm_new.csv';
         let gsRef = storage.refFromURL(refurl); 
@@ -92,8 +94,8 @@ class HeartRing extends React.Component {
                 let reader = new FileReader();
                 reader.addEventListener('loadend', () => {
                     let uarr = new Uint8Array(reader.result)
+                    console.log("uarr ")
                     let end = Math.floor(uarr.length/100000) + 1
-
                     //too big to process all at once, divide into 100,000 nums at once
                     let dataStr = ''
                     for(let i = 0; i < end; i+=1){
@@ -103,35 +105,22 @@ class HeartRing extends React.Component {
                     let dataPts = dataStr.split(/\n/)
 
                     //holds all the data(per second)
-                    let seen = false
                     let dataDay = []
-                    //gather all for 1 day
+                    //gather all
                     for(let j = 0; j < dataPts.length; j +=1){
                         let data = dataPts[j].split(',')
                         let value = parseFloat(data[1])
-                        //first part of string is date, second is time
-                        if(data[0].slice(0,10) == date){
-                            seen = true
-                            if(value != 0){
-                                dataDay.push([data[0], value])
-                            }
-                        } else if (seen){//break if seen the date already (its in chron order)
-                            break
+                        if(value != 0){
+                            dataDay.push([data[0], value])
                         }
                     }  
 
-                    if(dataDay.length == 0){
-                        return//there is no data for that day
-                    }
-
-                    //get the average for a minute, and max and min
+                    //get the average for 5 minutes
                     let dataMinutes = []
                     let minuteMax = this.get24Time(dataDay[0][0]) + 5/60//for every 5 min
                     let sum = 0//value sum
                     let total = 0//num of data pts
                     let k = 0//index for data
-                    let min = 500
-                    let max = 0
                     while(k < dataDay.length){
                         //same min- add to total, count
                         let time = this.get24Time(dataDay[k][0])
@@ -145,15 +134,12 @@ class HeartRing extends React.Component {
                             minuteMax = time+5/60
                             sum = dataDay[k][1]
                             total = 1
-                            if(av >= max){
-                                max = av
-                            } if(av <= min){//both ifs to catch first value
-                                min = av
-                            }
                         }
                         k += 1
                     }
-                    this.makeSections(dataMinutes, min, max)
+                    this.setState({
+                        data: dataMinutes
+                    })
                 });
                 reader.readAsArrayBuffer(blob);
             };
@@ -162,8 +148,29 @@ class HeartRing extends React.Component {
         }); 
     }
 
+    processForDay = (date) =>{
+        //gets all the data for the day
+        let seen = false
+        let min = 500
+        let max = 0
+        let dataDay = []
+        for(let i = 0; i < this.state.data.length; i+=1){
+            if(this.state.data[i][0].slice(0,10) == date){
+                dataDay.push(this.state.data[i])
+                seen = true
+            }else if(seen){
+                break
+            }
+            if(this.state.data[i][1] <= min){
+                min = this.state.data[i][1]
+            } if(this.state.data[i][1] >= max){
+                max = this.state.data[i][1]
+            }
+        }
+        this.makeSections(dataDay, min, max)
+    }
+
     reformatDate = (chosenDate) =>{
-        console.log(chosenDate)
         if(chosenDate == undefined){
             return undefined
         }
@@ -184,14 +191,10 @@ class HeartRing extends React.Component {
     }
 
     componentDidUpdate(){//run after it re-renders when the date changes
-        console.log("did update")
+        //need to make soemthing to process for a day then make is show
         let day = this.reformatDate(this.props.date)
-        console.log("date now ", day)
-        console.log("date old ", this.state.oldDay)
-
-        if(day != this.state.oldDay){
-            console.log("dates not equal")
-            this.getHeartData(day, this.props.uid)
+        if(day != this.state.oldDay){//when day changes
+            this.processForDay(day)//will trigger didUpdate
             this.setState({
                 oldDay: day
             })
@@ -199,13 +202,12 @@ class HeartRing extends React.Component {
     }
 
     componentDidMount(){//run once in beginning
+        this.getHeartData(this.props.uid)//get all data once
         //set day when first made so we know if the day changes later
-        console.log("did mount")
         let day = this.reformatDate(this.props.date)
-        this.setState({
+        this.setState({//will trigger didUpdate
             oldDay: day
         })
-        this.getHeartData(day, this.props.uid)//get data
     }
 
     render() {
