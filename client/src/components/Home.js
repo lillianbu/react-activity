@@ -8,7 +8,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      am: true,
+      am: 'am',
       hour: "one"
     }
   }
@@ -22,9 +22,9 @@ class Home extends React.Component {
   }
 
   toggleAm = () => {
-    if(!this.state.am){//pm to am
+    if(this.state.am == 'pm'){//pm to am
       this.setState({
-        am: true,
+        am: 'am',
       })
       document.getElementById('am').className = "btn_dark"
       document.getElementById('pm').className = "btn"
@@ -32,9 +32,9 @@ class Home extends React.Component {
   }
 
   togglePm = () => {
-    if(this.state.am){//am to pm
+    if(this.state.am == 'am'){//am to pm
       this.setState({
-        am: false
+        am: 'pm'
       })
       document.getElementById('am').className = "btn"
       document.getElementById('pm').className = "btn_dark"
@@ -52,7 +52,6 @@ class Home extends React.Component {
       <div className="center">
         <div className="clock-container">
           <h1>PAL Activity App</h1>
-          <p>it is: {this.state.hour} {this.state.am ? "am":"pm"}</p>
           <button onClick={this.redirectToTarget}>Profile</button>
           <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate} user={this.props.user}/>
           <div>

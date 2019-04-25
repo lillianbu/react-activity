@@ -13,7 +13,7 @@ export default class UpdateInfo extends React.Component {
 
 	    this.state = {
 	    	activity: this.props.activity,
-	    	name: this.props.name,
+	    	//name: this.props.name,
 	    	relationship: this.props.relationship,
 	    	location: this.props.location,
 	    };
@@ -59,21 +59,19 @@ export default class UpdateInfo extends React.Component {
   //     });
   //   }
 
-	 handleSubmit = (e) => {
+  handleSubmit = (e) => {
 	 	alert('Your form was submitted' + this.state.activity + this.state.name + this.state.relationship + this.state.location);
 	 	// writeUserData();
 	 	console.log("sending to database")
 	 	console.log(this.props.user)
-	      database.ref('users/' + this.props.user.uid + '/' + this.props.pointName ).set({
-	      	date: this.props.date,
-	      	time: this.props.time,
-	        name: this.state.name,
-	        activity: this.state.activity,
-	        relationship : this.state.relationship,
-	        location: this.state.location
-	      });
-	    this.props.closeModal();
-    	event.preventDefault();
+		database.ref("users/4afb720a-5214-4337-841b-d5f954214877/user_data/" + this.props.date+"/"+this.props.time ).update({
+			//name: this.state.name,
+			current_activity: this.state.activity,
+			relationship : this.state.relationship,
+			loc_name: this.state.location
+		});
+		this.props.closeModal();
+		event.preventDefault();
 	 }
 
     render () {
@@ -81,7 +79,7 @@ export default class UpdateInfo extends React.Component {
         	<div>
         		<form onSubmit={this.handleSubmit}>
         			<UpdateActivity activity={this.state.activity} sendData={this.getActivityData}/>
-        			<UpdateName name={this.state.name} sendData={this.getNameData}/>
+        			{/* <UpdateName name={this.state.name} sendData={this.getNameData}/> */}
         			<UpdateRelationship relationship={this.state.relationship} sendData={this.getRelationshipData}/>
         			<UpdateLocation location={this.state.location} sendData={this.getLocationData}/>
         			<input type="submit" value="Submit" />

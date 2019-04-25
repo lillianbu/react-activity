@@ -31,8 +31,8 @@ class EventDot extends React.Component {
     }
 
     displayTime = () =>{
-        let time = this.props.time.split(" ")
-        this.props.passTime(time[0])//callback from Home to pass time up when clicked
+        //let time = this.props.time.split(" ")
+        //this.props.passTime(time[0])//callback from Home to pass time up when clicked
         console.log(this.props.time)
         //shows tooltip
         let tooltip = document.getElementById(this.props.time)
@@ -40,12 +40,10 @@ class EventDot extends React.Component {
     }
 
     getTime = () =>{
-        //time comes in as 11:00 am
-        let times1 = this.props.time.split(':')//would return list of 11, 00 am
-        let times2 = times1[1].split(" ")//returns list 00, am
-        let first = Number(times1[0])%12
-        let second = Number(times2[0])/60
-        return first+second
+        //time comes in as 01:55am
+        let hour = Number(this.props.time.slice(0,2))//would return 1
+        let min = Number(this.props.time.slice(3,5))//would return 55
+        return (hour%12 + min/60)
     }
 
     closeTooltip = () =>{
@@ -73,7 +71,6 @@ class EventDot extends React.Component {
         if (this.getTime() > 6){
             side = {right: '5px'}
         }
-        console.log("within dot render")
         return (
             <div id={String(this.props.date+this.props.time)} className="top" style={this.getPos()}>
                 <span className="dot top" onClick={this.displayTime}></span>
@@ -92,15 +89,13 @@ class EventDot extends React.Component {
                         >
 
                           <h2 ref={subtitle => this.subtitle = subtitle}>Update Info</h2>
-                          <div>I am a modal</div>
 
                           <UpdateInfo 
-                              pointName={this.props.pointName}
-                              user={this.props.user}
-                              date={this.props.date}
-                              time={this.props.time}
+                              user={this.props.user}//ref
+                              date={this.props.date}//ref
+                              time={this.props.time}//ref
                               activity={this.props.activity}
-                              name={this.props.name}
+                              //name={this.props.name}
                               relationship={this.props.relationship}
                               location={this.props.location}
                               closeModal={this.closeModal}
