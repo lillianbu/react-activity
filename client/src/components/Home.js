@@ -1,6 +1,12 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/app.css";
 import Clockface from "./Clockface";
+import Redirect from "react-router-dom/Redirect";
+// import Navbar from "react-bootstrap/Navbar";
+// import Nav from "react-bootstrap/Nav";
+// import Link from "react-router-dom/Link";
+// import NavItem from "react-bootstrap/NavItem";
 
 class Home extends React.Component {
 
@@ -13,10 +19,6 @@ class Home extends React.Component {
     }
   }
 
-  redirectToTarget = () => {
-    this.props.history.push('/profile')//sends to home
-  }
-
   goToUpdate = () => {
         this.props.history.push('/update');//sends to home
   }
@@ -27,7 +29,7 @@ class Home extends React.Component {
         am: 'am',
       })
       document.getElementById('am').className = "btn_dark"
-      document.getElementById('pm').className = "btn"
+      document.getElementById('pm').className = "btn_light"
     }
   }
 
@@ -36,7 +38,7 @@ class Home extends React.Component {
       this.setState({
         am: 'pm'
       })
-      document.getElementById('am').className = "btn"
+      document.getElementById('am').className = "btn_light"
       document.getElementById('pm').className = "btn_dark"
     }
   }
@@ -48,19 +50,25 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
-      <div className="center">
-        <div className="clock-container">
-          <h1>PAL Activity App</h1>
-          <button onClick={this.redirectToTarget}>Profile</button>
-          <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate} user={this.props.user}/>
-          <div>
-            <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
-            <button id="pm" className="btn" onClick={this.togglePm}>PM</button>
+    if(this.props.user == undefined){
+      return <Redirect to="/"/>
+    }else{
+      return (
+        <div>
+          <div className="center">
+            <div className="clock-container">
+              {/* <h1>PAL Activity</h1>
+              <button onClick={this.redirectToTarget}>Profile</button> */}
+              <Clockface am={this.state.am} passTime={this.passTime} goToUpdate={this.goToUpdate} user={this.props.user}/>
+              <div>
+                <button id="am" className="btn_dark" onClick={this.toggleAm}>AM</button>
+                <button id="pm" className="btn_light" onClick={this.togglePm}>PM</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 

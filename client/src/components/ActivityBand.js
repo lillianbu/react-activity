@@ -45,7 +45,8 @@ class ActivityBand extends React.Component {
   }
 
   getColor = (activity) => {
-    let activityColor = {' On_Foot ':'darkorchid', ' Work ':'orange', ' Meeting ':'darkblue'}
+    let activityColor = {' On_Foot ':'darkorchid', ' Still ':'orange', ' In_Vehicle ':'darkblue',
+        ' On_Bicycle ': 'red', ' Running ':'green', ' Tilting ':'blue', ' Unkown ':'black', ' Walking':'purple'}
     if(activity in activityColor){
       return activityColor[activity]
     } else{

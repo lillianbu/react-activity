@@ -73,11 +73,13 @@ button{
     font-family: 'Montserrat', sans-serif;
 }
 
-.btn{
+.btn_light{
     background: #dbdbdb;
+    border-radius: .25rem;
 }
 .btn_dark{
     background: #a7a7a7;
+    border-radius: .25rem;
 }
 button:focus{
     outline: none;
@@ -113,3 +115,8 @@ button:focus{
     top: 0px;
     right: 5px;
   }
+
+.react-datepicker-ignore-onclickoutside{
+    text-indent: '5px';
+    height: inherit;
+}

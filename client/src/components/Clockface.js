@@ -187,6 +187,7 @@ export default class Clockface extends React.Component {
     render () { 
         return (
             <div id="clockface" className = "clockface">
+                <div>Select a Day:</div>
             	<DatePicker 
             	    dateFormat="yyyy/dd/MM"
             		selected={this.state.chosenDate}

@@ -80,7 +80,7 @@ class HeartRing extends React.Component {
 
     getHeartData = (userID) =>{
         //right now reads down the file to the time then processes that
-        let storage = firebase.storage(); 
+        let storage = firebase.storage(); //hard coded the location
         let refurl = 'gs://activity2019-f8035.appspot.com/users/4afb720a-5214-4337-841b-d5f954214877/Heart_Rate/bpm_new.csv';
         let gsRef = storage.refFromURL(refurl); 
         gsRef.getDownloadURL().then((url) => {
