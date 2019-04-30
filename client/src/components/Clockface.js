@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ActivityBand from './ActivityBand';
 import HeartRing from './HeartRing';
+import HeartHeatMap from './HeartHeatMap';
 import { PassThrough } from 'stream';
 
 export default class Clockface extends React.Component {
@@ -16,7 +17,11 @@ export default class Clockface extends React.Component {
         this.state = {
             chosenDate: new Date(),
             points: {},
-            keylis: []//list of keys-so can index
+            keylis: [],//list of keys-so can index
+            data: [12, 5, 6, 6, 9, 10],
+            width: 700,
+            height: 500,
+            id: root
         }
     }
 
@@ -214,6 +219,9 @@ export default class Clockface extends React.Component {
                             }
                     ):console.log("no data")
                     }
+                </div>
+                <div id='heart-heat-map'>
+                <HeartHeatMap date={this.state.chosenDate} uid={this.props.user.uid}/>
                 </div>
             </div>
         );
