@@ -28,7 +28,7 @@ class Login extends React.Component {
       <div className="center">
         <h1>PAL Activity</h1>
         <span>
-          <button onClick={this.login}>Login through Firebase</button>
+          <button className='btn_light' onClick={this.login}>Login through Google</button>
         </span>
       </div>
     );

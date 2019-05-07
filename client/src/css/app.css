@@ -69,6 +69,10 @@ body {
     text-align: center;
 }
 
+.heart-heat-map{
+    padding-left:50%;
+}
+
 button{
     font-family: 'Montserrat', sans-serif;
 }
@@ -119,4 +123,13 @@ button:focus{
 .react-datepicker-ignore-onclickoutside{
     text-indent: '5px';
     height: inherit;
+}
+.imgcirc {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    object-fit: cover;
 }

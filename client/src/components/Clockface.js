@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ActivityBand from './ActivityBand';
 import HeartRing from './HeartRing';
+import HeartHeatMap from './HeartHeatMap';
+import ImgCirc from './ImgCirc';
 import { PassThrough } from 'stream';
 
 export default class Clockface extends React.Component {
@@ -16,8 +18,19 @@ export default class Clockface extends React.Component {
         this.state = {
             chosenDate: new Date(),
             points: {},
-            keylis: []//list of keys-so can index
+            keylis: [],//list of keys-so can index
+            picName: '',
+            data: [12, 5, 6, 6, 9, 10],
+            width: 700,
+            height: 500,
+            id: root
         }
+    }
+
+    passPic = (name) =>{
+        this.setState({
+            picName: name
+        })
     }
 
     reformatDate = (chosenDate) =>{
@@ -43,7 +56,8 @@ export default class Clockface extends React.Component {
     	this.setState({
     		chosenDate: chosenDate,
             points: {},
-            keylis: []
+            keylis: [],
+            picName: ''
     	});
         //gets each time from date path
         let temp = {}
@@ -197,6 +211,7 @@ export default class Clockface extends React.Component {
                     <Clock className='clock-svg' />
                     <ActivityBand points={this.getChangePts(this.props.am)}/>
                     <HeartRing date={this.state.chosenDate} am={this.props.am} uid={this.props.user.uid}/>
+                    <ImgCirc imageID='circ' userID={this.props.user.uid} imageName={this.state.picName}/>
                     {this.state.points[this.state.keylis[0]] != undefined ? 
                         this.displayPoints(this.getChangePts()).map(i => {
                             let point = this.state.points[i];
@@ -209,12 +224,17 @@ export default class Clockface extends React.Component {
                                 relationship={point.relationship}
                                 location={point.loc_name}
                                 //passTime={this.props.passTime}
+                                pic={point.object_pic_loc}
+                                passPic={this.passPic}
                                 goToUpdate={this.props.goToUpdate}
                                 user={this.props.user}
                             />)
                             }
                     ):console.log("no data")
                     }
+                </div>
+                <div id='heart-heat-map'>
+                {/* <HeartHeatMap date={this.state.chosenDate} uid={this.props.user.uid}/> */}
                 </div>
             </div>
         );

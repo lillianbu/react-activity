@@ -34,6 +34,7 @@ class EventDot extends React.Component {
         //let time = this.props.time.split(" ")
         //this.props.passTime(time[0])//callback from Home to pass time up when clicked
         console.log(this.props.time)
+        this.props.passPic(this.props.pic)
         //shows tooltip
         let tooltip = document.getElementById(this.props.time)
         tooltip.style.visibility = "visible";

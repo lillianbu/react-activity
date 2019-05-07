@@ -40,7 +40,7 @@ render() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home">Home</Nav.Link>
-              <Link class="nav-link" to="/profile">Profile</Link>
+              <Link className="nav-link" to="/profile">Profile</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
